@@ -8,23 +8,57 @@ To write a program to find the solution of a matrix using Gaussian Elimination.
 2. Anaconda – Python 3.7 Installation / Moodle-Code Runner
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1.Import the numpy module to use the built-in functions for calculation
+
+2.Prepare the lists from each linear equations and assign in np.array()
+
+3.Apply Gaussian elimination to convert the matrix into upper triangular form.
+
+4.End of the program
 
 ## Program:
 ```
 /*
 Program to find the solution of a matrix using Gaussian Elimination.
-Developed by: 
-RegisterNumber: 
+Developed by: MOHAMED MUBEEN A
+RegisterNumber: 212225040241
 */
+import os
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+
+n = int(input())
+
+a = []
+
+for i in range(n):
+    row = []
+    for j in range(n + 1):
+        row.append(float(input()))
+    a.append(row)
+
+for i in range(n):
+    for j in range(i + 1, n):
+        ratio = a[j][i] / a[i][i]
+        for k in range(n + 1):
+            a[j][k] = a[j][k] - ratio * a[i][k]
+
+x = [0 for i in range(n)]
+
+x[n - 1] = a[n - 1][n] / a[n - 1][n - 1]
+
+for i in range(n - 2, -1, -1):
+    s = 0
+    for j in range(i + 1, n):
+        s = s + a[i][j] * x[j]
+
+    x[i] = (a[i][n] - s) / a[i][i]
+
+for i in range(n):
+    print("X%d = %.2f" % (i, x[i]), end=" ")
 ```
 
 ## Output:
-![gaussian elimination]()
-
+<img width="965" height="381" alt="image" src="https://github.com/user-attachments/assets/e89b4627-c4af-4e5f-bde3-5cf4779e5977" />
 
 ## Result:
 Thus the program to find the solution of a matrix using Gaussian Elimination is written and verified using python programming.
